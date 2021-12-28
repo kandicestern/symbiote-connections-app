@@ -1,16 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import AllConnections from './components/AllConnections';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          symbiote journey map
-        </p>
-        
+        <h1>header</h1>
       </header>
+      <div className="App-body">
+<AllConnections/>
+      </div>
     </div>
   );
 }
