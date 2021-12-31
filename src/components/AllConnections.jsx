@@ -5,12 +5,19 @@
 //import { Fragment } from "react";
 import ListConnection from "./Connection";
 import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
 
 export default function AllConnections() {
+  const AddCxnButton = () => {
+    return <Button variant="contained">Add New</Button>;
+  };
   return (
     <Container size={1}>
-      <ListConnection />
-      <p>add new connection button</p>
+      <Card>
+        <ListConnection />
+      </Card>
+      <AddCxnButton />
     </Container>
   );
 }
