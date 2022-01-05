@@ -10,6 +10,10 @@ import StepContent from "@mui/material/StepContent";
 import Typography from "@mui/material/Typography";
 
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
+import TramIcon from '@mui/icons-material/Tram';
+import TrainIcon from '@mui/icons-material/Train';
+
+
 
 const stops = [
   {
@@ -33,9 +37,12 @@ const stops = [
 ];
 
 export default function ConnectionDetails() {
+
+// display icon based on stop.mode
   const busIcon = () => {
     return <DirectionsBusIcon />;
   };
+  
   return (
     <Box sx={{ maxWidth: 400 }}>
       <Stepper nonLinear orientation="vertical">

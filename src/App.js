@@ -1,6 +1,9 @@
 import './App.css';
 import AllConnections from './components/AllConnections';
 
+// AddConnection component testing 
+// import AddConnection from './components/AddConnection';
+
 function App() {
   return (
     <div className="App">
