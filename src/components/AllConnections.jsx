@@ -7,16 +7,22 @@ import ListConnection from "./Connection";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
+import { Link } from "react-router-dom";
 
 export default function AllConnections() {
   const AddCxnButton = () => {
-    return <Button variant="contained">Add New</Button>;
+    return (
+      <Link to="/add-connection">
+        <Button variant="contained">Add New</Button>
+      </Link>
+    );
   };
   return (
     <Container size={1}>
       <Card>
         <ListConnection />
       </Card>
+
       <AddCxnButton />
     </Container>
   );

@@ -1,19 +1,28 @@
-import './App.css';
-import AllConnections from './components/AllConnections';
+import "./App.css";
+import AllConnections from "./components/AllConnections";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-// AddConnection component testing 
-// import AddConnection from './components/AddConnection';
+import AddConnection from "./components/AddConnection";
+import ConnectionDetails from "./components/ConnectionDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>header</h1>
-      </header>
-      <div className="App-body">
-<AllConnections/>
+    
+      <div className="App">
+        <header className="App-header">
+          <h1>app header</h1>
+        </header>
+        <Router>
+        <div className="App-body">
+          <Routes>
+            <Route path="/add-connection" element={<AddConnection/>} />
+            <Route path="/" element={<AllConnections/>} />
+            <Route path="/connection-details" element={<ConnectionDetails/>} />
+          </Routes>
+        </div>
+        </Router>
       </div>
-    </div>
+    
   );
 }
 

@@ -13,6 +13,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 export default function AddConnection() {
   const ConnectionForm = (params) => {
@@ -22,7 +23,11 @@ export default function AddConnection() {
         return <Button variant="contained">Save Connection</Button>;
       };
       const CancelCxnButton = () => {
-        return <Button variant="outlined">Cancel</Button>;
+        return (
+          <Link to="/">
+            <Button variant="outlined">Cancel</Button>
+          </Link>
+        );
       };
       return (
         <ButtonGroup>
