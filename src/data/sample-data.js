@@ -1,4 +1,5 @@
 const DataSet = {
+    name: "Sample Connection",
     stops: [
         {
             id: "2273",

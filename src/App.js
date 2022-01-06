@@ -1,17 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import AllConnections from "./components/AllConnections";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import AddConnection from "./components/AddConnection";
+import ConnectionDetails from "./components/ConnectionDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          symbiote journey map
-        </p>
-        
-      </header>
-    </div>
+    
+      <div className="App">
+        <header className="App-header">
+          <h1>app header</h1>
+        </header>
+        <Router>
+        <div className="App-body">
+          <Routes>
+            <Route path="/add-connection" element={<AddConnection/>} />
+            <Route path="/" element={<AllConnections/>} />
+            <Route path="/connection-details" element={<ConnectionDetails/>} />
+          </Routes>
+        </div>
+        </Router>
+      </div>
+    
   );
 }
 
