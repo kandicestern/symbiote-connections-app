@@ -22,6 +22,7 @@ export default function AllConnections() {
       <Card>
         <ListConnection />
       </Card>
+      <br />
 
       <AddCxnButton />
     </Container>

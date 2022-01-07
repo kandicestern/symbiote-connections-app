@@ -32,6 +32,7 @@ export default function AddConnection() {
       return (
         <ButtonGroup>
           <SaveCxnButton />
+          &nbsp;
           <CancelCxnButton />
         </ButtonGroup>
       );
@@ -76,7 +77,7 @@ export default function AddConnection() {
 
       return (
         <FormControl>
-          <Select value={stop} label="Stop" onChange={handleSelectStop}>
+          <Select value={stop} onChange={handleSelectStop}>
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
@@ -89,13 +90,16 @@ export default function AddConnection() {
       );
     };
     return (
-      <FormControl>
-        <ConnectionName />
-        <SelectStop id="stop-1" />
-        <SelectStop id="stop-2" />
-        <SelectStop id="stop-3" />
-        <AddCxnButtons />
-      </FormControl>
+      <form id="add-cxn">
+        <FormControl>
+          <ConnectionName />
+          <br />
+          <SelectStop id="stop-1" />
+          <SelectStop id="stop-2" />
+          <SelectStop id="stop-3" />
+          <AddCxnButtons />
+        </FormControl>
+      </form>
     );
   };
   return <ConnectionForm />;
