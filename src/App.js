@@ -10,7 +10,7 @@ function App() {
     
       <div className="App">
         <header className="App-header">
-          <h1>app header</h1>
+          <h1>My Connections</h1>
         </header>
         <Router>
         <div className="App-body">
