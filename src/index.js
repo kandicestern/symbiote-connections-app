@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createStore } from "redux";
 import addCxn from "./data/reducers/addCxn";
+import { Provider } from "react-redux";
 
 let store = createStore(
   addCxn,
@@ -13,7 +14,9 @@ let store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

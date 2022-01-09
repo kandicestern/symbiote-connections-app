@@ -11,8 +11,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Typography from "@mui/material/Typography";
 
 import ConnectionDetails from "./ConnectionDetails";
+import { useSelector } from "react-redux";
 
 function ListConnection() {
+  const name = useSelector((state) => state.name);
   const ConnectionAccordion = () => {
     return (
       <Accordion>
@@ -21,14 +23,15 @@ function ListConnection() {
           aria-controls="connection-content"
           id="connection-header"
         >
-          <Typography>Connection Name</Typography>
+          <Typography>{name}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <ConnectionDetails/>
+          <ConnectionDetails />
         </AccordionDetails>
       </Accordion>
     );
   };
+
   return (
     <div>
       <ConnectionAccordion />

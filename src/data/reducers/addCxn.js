@@ -1,6 +1,5 @@
 import DataSet from "../sample-data";
-
-// REDUCER -> DESCRIBE HOW ACTION WILL AFFECT/MODIFY STORE
+//import connections from "../connections-data";
 
 // ADD NEW CONNECTION
 const initialState = DataSet;

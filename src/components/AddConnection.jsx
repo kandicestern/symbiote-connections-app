@@ -14,6 +14,7 @@ import Select from "@mui/material/Select";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function AddConnection() {
   const ConnectionForm = (params) => {
@@ -50,24 +51,7 @@ export default function AddConnection() {
       );
     };
     const SelectStop = () => {
-      // replace w redux store
-      const stops = [
-        {
-          id: "2273",
-          mode: "tram",
-          title: "Clarendon St/Park St #24",
-        },
-        {
-          id: "1071",
-          mode: "train",
-          title: "Flinders Street Station",
-        },
-        {
-          id: "31845",
-          mode: "bus",
-          title: "Footscray Station / Irving St",
-        },
-      ];
+      const stops = useSelector((state) => state.stops);
 
       const [stop, setStop] = React.useState("");
 
@@ -78,12 +62,9 @@ export default function AddConnection() {
       return (
         <FormControl>
           <Select value={stop} onChange={handleSelectStop}>
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={stops[0].title}>{stops[0].title}</MenuItem>
-            <MenuItem value={stops[1].title}>{stops[1].title}</MenuItem>
-            <MenuItem value={stops[2].title}>{stops[2].title}</MenuItem>
+            {stops.map((stop) => (
+              <MenuItem value={stop.title}>{stop.title}</MenuItem>
+            ))}
           </Select>
           <FormHelperText>Select stop</FormHelperText>
         </FormControl>
