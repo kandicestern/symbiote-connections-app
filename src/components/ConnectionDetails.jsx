@@ -1,53 +1,34 @@
-// display stops with next 3 departure times
-// only display departure times > current time (?)
-
-import * as React from "react";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
-import Typography from "@mui/material/Typography";
+
+import { useSelector } from "react-redux";
 
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import TramIcon from "@mui/icons-material/Tram";
 import TrainIcon from "@mui/icons-material/Train";
+//import { format } from "date-fns";
 
+// TRANSPORT MODE ICONS
+const busIcon = () => {
+  return <DirectionsBusIcon />;
+};
 
-const stops = [
-  {
-    id: "2273",
-    mode: "tram",
-    title: "Clarendon St/Park St #24",
-    departure_time_utc: "2019-03-21T02:24:00Z",
-  },
-  {
-    id: "1071",
-    mode: "train",
-    title: "Flinders Street Station",
-    departure_time_utc: "2019-03-21T02:24:00Z",
-  },
-  {
-    id: "31845",
-    mode: "bus",
-    title: "Footscray Station / Irving St",
-    departure_time_utc: "2019-03-21T02:24:00Z",
-  },
-];
+const tramIcon = () => {
+  return <TramIcon />;
+};
+
+const trainIcon = () => {
+  return <TrainIcon />;
+};
 
 export default function ConnectionDetails() {
-  const busIcon = () => {
-    return <DirectionsBusIcon />;
-  };
-
-  const tramIcon = () => {
-    return <TramIcon />;
-  };
-
-  const trainIcon = () => {
-    return <TrainIcon />;
-  };
-
+  const departures = useSelector((state) => state.departures);
+  const stops = useSelector((state) => state.stops);
+  // const local_departure_time = () => {format(departure.departure_time_utc, HH:mm)};
   return (
     <Box sx={{ maxWidth: 400 }}>
       <Stepper nonLinear orientation="vertical">
@@ -55,16 +36,25 @@ export default function ConnectionDetails() {
           <Step active expanded key={stop.title}>
             <StepLabel
               StepIconComponent={
-                // display icon based on mode of transport
+                // render icon based on mode of transport
                 (stop.mode === "bus" && busIcon) ||
                 (stop.mode === "tram" && tramIcon) ||
                 (stop.mode === "train" && trainIcon)
               }
             >
-              {stop.title}
+              {
+                // match connection.stops with stops.id to conditionally render stops
+                stop.title
+              }
             </StepLabel>
             <StepContent>
-              <Typography>{stop.departure_time_utc}</Typography>
+              <Typography>Next departures:</Typography>
+              {departures.map(
+                (departure) =>
+                  departure.stop_id === stop.id && (
+                    <Typography>{departure.departure_time_utc}</Typography> // replace with local_departure_time
+                  )
+              )}
             </StepContent>
           </Step>
         ))}
