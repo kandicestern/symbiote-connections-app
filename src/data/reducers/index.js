@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 import addCxn from "./addCxn";
-import DataSet from "../sample-data";
+import DataSet from "../stop-data";
 // STORE -> GLOBALISED STATE
 
 // ACTION -> SAVE CONNECTION

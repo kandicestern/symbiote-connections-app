@@ -1,11 +1,6 @@
-// page for adding connection
-// form with name field and 3x dropdown fields to select stops
-// save button (must save connection to database and display on AllConnections)
-
-//additional feature ideas: tooltips; '+' button that creates new Select component;
-
 import * as React from "react";
-
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -13,16 +8,45 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import Snackbar from "@mui/material/Snackbar";
 
-export default function AddConnection() {
-  const ConnectionForm = (params) => {
+class ConnectionForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      connection: {
+        name: "",
+        stops: [""],
+      },
+    };
+  }
+
+  render() {
+    const handleSave = (e) => {
+      alert("New connection '" + e.target.name.value + "' saved"); // replace with Snackbar component
+
+      // update state with form contents
+      this.setState({
+        connection: {
+          name: e.target.name.value,
+          stops: [e.target.stop.value],
+        },
+      });
+      // save form contents as new connection
+      // return to "/" page to view all connections
+    };
+
     // form buttons
     const AddCxnButtons = () => {
       const SaveCxnButton = () => {
-        return <Button variant="contained">Save Connection</Button>;
+        return (
+          <Button type="submit" variant="contained">
+            Save Connection
+          </Button>
+        );
       };
+
       const CancelCxnButton = () => {
         return (
           <Link to="/">
@@ -39,17 +63,22 @@ export default function AddConnection() {
       );
     };
 
+    // form fields
+    // name
     const ConnectionName = () => {
       return (
         <TextField
           required
+          name="name"
           id="cxn-name"
           label="Name"
+          value={this.state.name}
           placeholder="eg 'To Work'"
           variant="filled"
         />
       );
     };
+    // stops selection dropdown
     const SelectStop = () => {
       const stops = useSelector((state) => state.stops);
 
@@ -61,9 +90,9 @@ export default function AddConnection() {
 
       return (
         <FormControl>
-          <Select value={stop} onChange={handleSelectStop}>
+          <Select name="stops" value={stop} onChange={handleSelectStop}>
             {stops.map((stop) => (
-              <MenuItem value={stop.title}>{stop.title}</MenuItem>
+              <MenuItem value={stop.id}>{stop.title}</MenuItem>
             ))}
           </Select>
           <FormHelperText>Select stop</FormHelperText>
@@ -71,7 +100,7 @@ export default function AddConnection() {
       );
     };
     return (
-      <form id="add-cxn">
+      <form onSubmit={handleSave} value={this.state.connection} id="add-cxn">
         <FormControl>
           <ConnectionName />
           <br />
@@ -82,6 +111,6 @@ export default function AddConnection() {
         </FormControl>
       </form>
     );
-  };
-  return <ConnectionForm />;
+  }
 }
+export default ConnectionForm;

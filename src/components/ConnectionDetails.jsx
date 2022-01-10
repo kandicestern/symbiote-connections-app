@@ -1,21 +1,18 @@
-// display stops with next 3 departure times
-// only display departure times > current time (?)
-
-import * as React from "react";
+import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import StepContent from "@mui/material/StepContent";
-import Typography from "@mui/material/Typography";
+
+import { useSelector } from "react-redux";
 
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import TramIcon from "@mui/icons-material/Tram";
 import TrainIcon from "@mui/icons-material/Train";
+//import { format } from "date-fns";
 
-import { useSelector } from "react-redux";
-
-// TRANSPORT MODE ICONS 
+// TRANSPORT MODE ICONS
 const busIcon = () => {
   return <DirectionsBusIcon />;
 };
@@ -29,7 +26,9 @@ const trainIcon = () => {
 };
 
 export default function ConnectionDetails() {
+  const departures = useSelector((state) => state.departures);
   const stops = useSelector((state) => state.stops);
+  // const local_departure_time = () => {format(departure.departure_time_utc, HH:mm)};
   return (
     <Box sx={{ maxWidth: 400 }}>
       <Stepper nonLinear orientation="vertical">
@@ -43,10 +42,19 @@ export default function ConnectionDetails() {
                 (stop.mode === "train" && trainIcon)
               }
             >
-              {stop.title}
+              {
+                // match connection.stops with stops.id to conditionally render stops
+                stop.title
+              }
             </StepLabel>
             <StepContent>
-              <Typography>DEPARTURE TIMES</Typography>
+              <Typography>Next departures:</Typography>
+              {departures.map(
+                (departure) =>
+                  departure.stop_id === stop.id && (
+                    <Typography>{departure.departure_time_utc}</Typography> // replace with local_departure_time
+                  )
+              )}
             </StepContent>
           </Step>
         ))}
